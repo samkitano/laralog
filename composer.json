@@ -1,0 +1,15 @@
+{
+    "name": "samkitano/laralog",
+    "description": "A Laravel Logs manager",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Kitano",
+            "email": "sam.kitano@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "^3.7"
+    }
+}
