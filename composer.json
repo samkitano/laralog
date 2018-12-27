@@ -11,5 +11,22 @@
     "require": {},
     "require-dev": {
         "orchestra/testbench": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "samkitano\\Laralog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "samkitano\\Laralog\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "samkitano\\Laralog\\LaralogServiceProvider"
+            ]
+        }
     }
 }
