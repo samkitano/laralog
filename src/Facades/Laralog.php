@@ -4,6 +4,15 @@ namespace samkitano\Laralog\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * Class Laralog
+ *
+ * @method static list()
+ * @method static dates()
+ * @method static group()
+ * @method static process($log)
+ * @method static latest()
+ */
 class Laralog extends Facade
 {
     /**

@@ -12,6 +12,7 @@ class LaralogServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
+            $this->registerHelpers();
             $this->registerPublishing();
             $this->registerFacades();
         }
@@ -45,5 +46,17 @@ class LaralogServiceProvider extends ServiceProvider
         $this->app->singleton('Laralog', function ($app) {
             return new \samkitano\Laralog\Laralog();
         });
+    }
+
+    /**
+     * Register helper files
+     */
+    protected function registerHelpers()
+    {
+        $helper = __DIR__.DIRECTORY_SEPARATOR.'helpers.php';
+
+        if (file_exists($helper)) {
+            require_once $helper;
+        }
     }
 }

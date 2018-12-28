@@ -1,32 +1,34 @@
 {
-    "name": "samkitano/laralog",
-    "description": "A Laravel Logs manager",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Sam Kitano",
-            "email": "sam.kitano@gmail.com"
-        }
-    ],
-    "require": {},
-    "require-dev": {
-        "orchestra/testbench": "^3.7"
-    },
-    "autoload": {
-        "psr-4": {
-            "samkitano\\Laralog\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "samkitano\\Laralog\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "samkitano\\Laralog\\LaralogServiceProvider"
-            ]
-        }
+  "name": "samkitano/laralog",
+  "description": "A Laravel Logs manager",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sam Kitano",
+      "email": "sam.kitano@gmail.com"
     }
+  ],
+  "require": {
+    "samkitano/kompressor": "^1.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^3.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "samkitano\\Laralog\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "samkitano\\Laralog\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "samkitano\\Laralog\\LaralogServiceProvider"
+      ]
+    }
+  }
 }
