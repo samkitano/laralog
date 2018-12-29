@@ -25,6 +25,13 @@ if (! defined('LL_LOG_PREFIX')) {
 }
 
 if (! function_exists('maxDate')) {
+    /**
+     * Returns most recent date in an array of dates
+     *
+     * @param array $dates
+     *
+     * @return false|string
+     */
     function maxDate(array $dates)
     {
         $timestamp = max(array_map('strtotime', $dates));
@@ -59,161 +66,183 @@ if (! function_exists('string_between')) {
     }
 }
 
-function shortMonthToNumber($shortMonth)
-{
-    $months = [
-        'Jan' => '01',
-        'Feb' => '02',
-        'Mar' => '03',
-        'Apr' => '04',
-        'May' => '05',
-        'Jun' => '06',
-        'Jul' => '07',
-        'Aug' => '08',
-        'Sep' => '09',
-        'Oct' => '10',
-        'Nov' => '11',
-        'Dec' => '12',
-    ];
+if (! function_exists('shortMonthToNumber')) {
+    /**
+     * @param string $shortMonth
+     *
+     * @return bool|mixed
+     */
+    function shortMonthToNumber(string $shortMonth)
+    {
+        $months = [
+            'Jan' => '01',
+            'Feb' => '02',
+            'Mar' => '03',
+            'Apr' => '04',
+            'May' => '05',
+            'Jun' => '06',
+            'Jul' => '07',
+            'Aug' => '08',
+            'Sep' => '09',
+            'Oct' => '10',
+            'Nov' => '11',
+            'Dec' => '12',
+        ];
 
-    if (! array_key_exists($shortMonth, $months)) {
-        return false;
-    }
-
-    return $months[$shortMonth];
-}
-
-function longMonthToNumber($longMonth): string
-{
-    $months = [
-        'January' => '01',
-        'February' => '02',
-        'March' => '03',
-        'April' => '04',
-        'May' => '05',
-        'June' => '06',
-        'July' => '07',
-        'August' => '08',
-        'September' => '09',
-        'October' => '10',
-        'November' => '11',
-        'December' => '12',
-    ];
-
-    if (! array_key_exists($longMonth, $months)) {
-        return false;
-    }
-
-    return $months[$longMonth];
-}
-
-/**
- * @param string $date
- *
- * @return bool|string
- */
-function normalizeDateName(string $date)
-{
-    $date = str_replace('/', '-', $date);
-    $date = trim($date, '-');
-    $exp = explode('-', $date);
-
-    if (count($exp) !== 3) {
-        return false;
-    }
-
-    $year = normalizeYear($exp[0]);
-    $month = normalizeMonth($exp[1]);
-    $day = normalizeDay($exp[2]);
-
-    if (! $year || ! $month || ! $day) {
-        return false;
-    }
-
-    $cd = \Illuminate\Support\Carbon::create($year, $month, $day);
-    $now = \Illuminate\Support\Carbon::now();
-
-    if ($cd > $now) {
-        return false;
-    }
-
-    $d = $year.'-'.$month.'-'.$day;
-
-    try {
-        \Illuminate\Support\Carbon::parse($d);
-    } catch (\Exception $e) {
-        return false;
-    }
-
-    return $d;
-}
-
-/**
- * @param string $day
- *
- * @return mixed|string
- */
-function normalizeDay(string $day): string
-{
-    $dayLen = strlen($day);
-
-    if ($dayLen > 2) {
-        $day = str_replace('th', '', $day);
-    }
-
-    if ($dayLen === 1) {
-        $day = '0' . $day;
-    }
-
-    return $day;
-}
-
-/**
- * @param string $month
- *
- * @return string
- */
-function normalizeMonth(string $month): string
-{
-    $monthLen = strlen($month);
-
-    if ($monthLen === 1) {
-        $month = '0' . $month;
-    }
-
-    if ($monthLen > 2) {
-        if ($monthLen === 3) {
-            $month = shortMonthToNumber($month);
+        if (!array_key_exists($shortMonth, $months)) {
+            return false;
         }
 
-        if ($monthLen > 3) {
-            $month = longMonthToNumber($month);
-        }
+        return $months[$shortMonth];
     }
-
-    return $month;
 }
 
-/**
- * @param string $year
- *
- * @return string
- */
-function normalizeYear(string $year): string
-{
-    $yearLen = strlen($year);
-    $now = \Illuminate\Support\Carbon::now();
-    $y2d = (int) substr($now->year, 2, 2);
+if (! function_exists('longMonthToNumber')) {
+    /**
+     * @param string $longMonth
+     *
+     * @return string
+     */
+    function longMonthToNumber(string $longMonth): string
+    {
+        $months = [
+            'January' => '01',
+            'February' => '02',
+            'March' => '03',
+            'April' => '04',
+            'May' => '05',
+            'June' => '06',
+            'July' => '07',
+            'August' => '08',
+            'September' => '09',
+            'October' => '10',
+            'November' => '11',
+            'December' => '12',
+        ];
 
-    if ($yearLen !== 4) {
-        if ($yearLen === 3) {
-            $year = $year[0] === '0' ? '2' . $year : '1' . $year;
+        if (!array_key_exists($longMonth, $months)) {
+            return false;
         }
 
-        if ($yearLen === 2) {
-            $year = (int) $year <= $y2d ? '20' . $year : '19' . $year;
-        }
+        return $months[$longMonth];
     }
+}
 
-    return $year;
+if (! function_exists('normalizeDateName')) {
+    /**
+     * @param string $date
+     *
+     * @return bool|string
+     */
+    function normalizeDateName(string $date)
+    {
+        $date = str_replace('/', '-', $date);
+        $date = trim($date, '-');
+        $exp = explode('-', $date);
+
+        if (count($exp) !== 3) {
+            return false;
+        }
+
+        $year = normalizeYear($exp[0]);
+        $month = normalizeMonth($exp[1]);
+        $day = normalizeDay($exp[2]);
+
+        if (!$year || !$month || !$day) {
+            return false;
+        }
+
+        $cd = \Illuminate\Support\Carbon::create($year, $month, $day);
+        $now = \Illuminate\Support\Carbon::now();
+
+        if ($cd > $now) {
+            return false;
+        }
+
+        $d = $year . '-' . $month . '-' . $day;
+
+        try {
+            \Illuminate\Support\Carbon::parse($d);
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return $d;
+    }
+}
+
+if (! function_exists('normalizeDay')) {
+    /**
+     * @param string $day
+     *
+     * @return mixed|string
+     */
+    function normalizeDay(string $day): string
+    {
+        $dayLen = strlen($day);
+
+        if ($dayLen > 2) {
+            $day = str_replace('th', '', $day);
+        }
+
+        if ($dayLen === 1) {
+            $day = '0' . $day;
+        }
+
+        return $day;
+    }
+}
+
+if (! function_exists('normalizeMonth')) {
+    /**
+     * @param string $month
+     *
+     * @return string
+     */
+    function normalizeMonth(string $month): string
+    {
+        $monthLen = strlen($month);
+
+        if ($monthLen === 1) {
+            $month = '0' . $month;
+        }
+
+        if ($monthLen > 2) {
+            if ($monthLen === 3) {
+                $month = shortMonthToNumber($month);
+            }
+
+            if ($monthLen > 3) {
+                $month = longMonthToNumber($month);
+            }
+        }
+
+        return $month;
+    }
+}
+
+if (! function_exists('normalizeYear')) {
+    /**
+     * @param string $year
+     *
+     * @return string
+     */
+    function normalizeYear(string $year): string
+    {
+        $yearLen = strlen($year);
+        $now = \Illuminate\Support\Carbon::now();
+        $y2d = (int) substr($now->year, 2, 2);
+
+        if ($yearLen !== 4) {
+            if ($yearLen === 3) {
+                $year = $year[0] === '0' ? '2' . $year : '1' . $year;
+            }
+
+            if ($yearLen === 2) {
+                $year = (int)$year <= $y2d ? '20' . $year : '19' . $year;
+            }
+        }
+
+        return $year;
+    }
 }
