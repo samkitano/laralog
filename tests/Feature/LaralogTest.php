@@ -4,8 +4,8 @@ namespace samkitano\Laralog\Tests;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
-use samkitano\Laralog\Exceptions\LaralogException;
 use samkitano\Laralog\Facades\Laralog;
+use samkitano\Laralog\Exceptions\LaralogException;
 
 class LaralogTest extends TestCase
 {
@@ -66,9 +66,13 @@ class LaralogTest extends TestCase
         $log = $this->test_logs[0];
         $result = Laralog::process($log);
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -76,9 +80,13 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('2017-06-10');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -86,19 +94,27 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('017-06-10');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
     public function can_process_a_log_by_date_string_2digit_year_2digit_month_2digit_day()
     {
-        $result = Laralog::process('17-06-10');
+        $result = Laralog::process('18-11-27');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals('2018-11-27', $firstKey);
+        $this->assertEquals( 'laravel-2018-11-27.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -106,9 +122,13 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('2017-6-10');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -116,9 +136,13 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('2017-Jun-10');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -126,9 +150,13 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('2017-June-10');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -136,9 +164,13 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('2017-Jun-10th');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -146,9 +178,13 @@ class LaralogTest extends TestCase
     {
         $result = Laralog::process('2017-Dec-2');
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-12-02', $firstKey);
+        $this->assertEquals( 'laravel-2017-12-02.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */
@@ -159,10 +195,13 @@ class LaralogTest extends TestCase
         $result = Laralog::process($date);
 
         $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
-
+        $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertTrue(is_array($entries));
     }
 
     /** @test */

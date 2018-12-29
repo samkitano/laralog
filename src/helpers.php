@@ -202,6 +202,8 @@ function normalizeMonth(string $month): string
 function normalizeYear(string $year): string
 {
     $yearLen = strlen($year);
+    $now = \Illuminate\Support\Carbon::now();
+    $y2d = (int) substr($now->year, 2, 2);
 
     if ($yearLen !== 4) {
         if ($yearLen === 3) {
@@ -209,7 +211,7 @@ function normalizeYear(string $year): string
         }
 
         if ($yearLen === 2) {
-            $year = (int)$year < 18 ? '20' . $year : '19' . $year;
+            $year = (int) $year <= $y2d ? '20' . $year : '19' . $year;
         }
     }
 

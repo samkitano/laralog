@@ -4,34 +4,55 @@ namespace samkitano\Laralog;
 
 class Laralog
 {
+    /** @var \samkitano\Laralog\Logger */
     protected $logger;
 
+    /**
+     * Laralog constructor.
+     */
     public function __construct()
     {
         $this->logger = new Logger();
     }
 
-    function list()
+    /**
+     * @return array
+     */
+    function list(): array
     {
         return $this->logger->getLogNames();
     }
 
-    function dates()
+    /**
+     * @return array
+     */
+    function dates(): array
     {
         return $this->logger->getLogNamesByDate();
     }
 
-    function group()
+    /**
+     * @return array
+     */
+    function group(): array
     {
         return $this->logger->getGroupedLogNames();
     }
 
-    function process($log = null)
+    /**
+     * @param null $log
+     *
+     * @return array
+     */
+    function process($log = null): array
     {
         return $this->logger->process($log);
     }
 
-    function latest()
+    /**
+     * @return string
+     */
+    function latest(): string
     {
         return $this->logger->getMostRecent();
     }

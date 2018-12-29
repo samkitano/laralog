@@ -70,6 +70,9 @@ class Logger
     }
 
     /**
+     * @todo: maybe refactor? func name is ambiguous. shd be most recent NAME
+     * and one more func providing the actual latest processed log
+     *
      * @return string
      */
     function getMostRecent(): string

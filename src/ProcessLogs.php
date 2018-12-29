@@ -4,6 +4,11 @@ namespace samkitano\Laralog;
 
 trait ProcessLogs
 {
+    /**
+     * @param string $log
+     *
+     * @return array
+     */
     protected function getLogEntries(string $log): array
     {
         $pattern = '/\[' . LL_DATE_PATTERN . ' ' . LL_TIME_PATTERN . '\].*/';
@@ -20,6 +25,11 @@ trait ProcessLogs
         return [$headers, $data];
     }
 
+    /**
+     * @param array $entries
+     *
+     * @return array
+     */
     protected function processEntries(array $entries): array
     {
         $res = [];
@@ -33,6 +43,12 @@ trait ProcessLogs
         return $res;
     }
 
+    /**
+     * @param string $header
+     * @param string $stack
+     *
+     * @return array
+     */
     protected function processEntry(string $header, string $stack): array
     {
         $dt = substr($header, 1, 19);
