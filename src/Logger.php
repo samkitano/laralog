@@ -9,24 +9,34 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class Logger
 {
+    /** @var bool|string */
     protected $path;
 
+    /** @var array */
     protected $logNames;
 
+    /** @var array */
     protected $byDate;
 
+    /** @var \Illuminate\Config\Repository|mixed */
     protected $mainArchive;
 
+    /** @var \Illuminate\Config\Repository|mixed */
     protected $mainArchiveExtension;
 
+    /** @var array */
     protected $groupedLogNames;
 
+    /** @var string */
     protected $latestLogName;
-    
+
+    /** @var array */
     protected $log;
 
+    /** @var string */
     protected $rawLog;
 
+    /** @var string */
     protected $currentLog;
 
     use ProcessLogs;
@@ -70,9 +80,6 @@ class Logger
     }
 
     /**
-     * @todo: maybe refactor? func name is ambiguous. shd be most recent NAME
-     * and one more func providing the actual latest processed log
-     *
      * @return string
      */
     function getMostRecent(): string
@@ -285,7 +292,7 @@ class Logger
      */
     protected function getLogFullPath($logfile): string
     {
-        $name = $logfile ?? $this->latestLogName;
+        $name = $logfile ?? $this->path.DIRECTORY_SEPARATOR.$this->latestLogName;
 
         return $this->pathify($name);
     }

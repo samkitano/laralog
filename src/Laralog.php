@@ -10,7 +10,7 @@ class Laralog
     /**
      * Laralog constructor.
      */
-    public function __construct()
+    function __construct()
     {
         $this->logger = new Logger();
     }

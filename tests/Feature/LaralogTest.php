@@ -61,6 +61,20 @@ class LaralogTest extends TestCase
     }
 
     /** @test */
+    public function can_processes_latest_log_if_log_name_omitted()
+    {
+        $result = Laralog::process();
+        $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
+
+        $this->assertTrue(is_array($result));
+        $this->assertEquals('2018-12-27', $firstKey);
+        $this->assertEquals( 'laravel-2018-12-27.log', $name);
+        $this->assertTrue(is_array($entries));
+    }
+
+    /** @test */
     public function can_process_a_log_by_full_path()
     {
         $log = $this->test_logs[0];
