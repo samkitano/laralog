@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Laralog - A Log manager for Laravel 5.7 +
+| Laralog - A Log manager for Laravel 5.7
 |--------------------------------------------------------------------------
 |
 | Here you can change this utility default settings.
