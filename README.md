@@ -101,7 +101,7 @@ Use ```Laralog::latest()``` to process the most recent log, or the
 - [object] a [Carbon](https://carbon.nesbot.com/) object. i.e. Carbon::create(2017, 6, 10);
 
 ```php
-$log = Laralog::process($log = null);
+$log = Laralog::process('2017-Jun-10');
 
 dump($log);
 ```
