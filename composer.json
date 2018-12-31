@@ -8,9 +8,6 @@
       "email": "sam.kitano@gmail.com"
     }
   ],
-  "require": {
-    "samkitano/kompressor": "^1.0"
-  },
   "require-dev": {
     "orchestra/testbench": "^3.7"
   },
