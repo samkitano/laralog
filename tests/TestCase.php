@@ -30,9 +30,4 @@ class TestCase extends \Orchestra\Testbench\TestCase
             LaralogServiceProvider::class
         ];
     }
-
-    protected function resetConfig()
-    {
-        Config::set('laralog.path', $this->initial_config);
-    }
 }
