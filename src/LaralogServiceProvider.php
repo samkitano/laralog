@@ -11,11 +11,9 @@ class LaralogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->registerHelpers();
-            $this->registerPublishing();
-            $this->registerFacades();
-        }
+        $this->registerHelpers();
+        $this->registerPublishing();
+        $this->registerFacades();
     }
 
     /**
