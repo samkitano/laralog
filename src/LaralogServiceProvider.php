@@ -41,9 +41,11 @@ class LaralogServiceProvider extends ServiceProvider
      */
     protected function registerFacades()
     {
-        $this->app->singleton('Laralog', function ($app) {
+        $this->app->singleton('Laralog', function () {
             return new \samkitano\Laralog\Laralog();
         });
+
+        $this->app->alias(\samkitano\Laralog\Laralog::class, 'Laralog');
     }
 
     /**
