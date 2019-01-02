@@ -44,8 +44,6 @@ class LaralogServiceProvider extends ServiceProvider
         $this->app->singleton('Laralog', function () {
             return new \samkitano\Laralog\Laralog();
         });
-
-        $this->app->alias(\samkitano\Laralog\Laralog::class, 'Laralog');
     }
 
     /**

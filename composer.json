@@ -25,7 +25,10 @@
     "laravel": {
       "providers": [
         "samkitano\\Laralog\\LaralogServiceProvider"
-      ]
+      ],
+      "aliases": {
+        "Laralog": "samkitano\\Laralog\\Facades\\Laralog"
+      }
     }
   }
 }
