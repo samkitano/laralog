@@ -90,6 +90,21 @@ class LaralogTest extends TestCase
     }
 
     /** @test */
+    public function can_process_a_log_by_name()
+    {
+        $log = 'laravel-2017-06-10.log';
+        $result = Laralog::process($log);
+        $firstKey = array_keys($result)[0];
+        $name = $result[$firstKey]['name'];
+        $entries = $result[$firstKey]['entries'];
+
+        $this->assertTrue(is_array($result));
+        $this->assertEquals('2017-06-10', $firstKey);
+        $this->assertEquals( $log, $name);
+        $this->assertTrue(is_array($entries));
+    }
+
+    /** @test */
     public function can_process_a_log_by_date_string_4digit_year_2digit_month_2digit_day()
     {
         $result = Laralog::process('2017-06-10');

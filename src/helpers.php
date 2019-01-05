@@ -136,6 +136,8 @@ if (! function_exists('normalizeDateName')) {
      */
     function normalizeDateName(string $date)
     {
+        $date = rtrim($date, LL_LOG_EXTENSION);
+        $date = ltrim($date, LL_LOG_PREFIX);
         $date = str_replace('/', '-', $date);
         $date = trim($date, '-');
         $exp = explode('-', $date);

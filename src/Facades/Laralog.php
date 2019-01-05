@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static list()
  * @method static dates()
  * @method static group()
- * @method static process($log)
+ * @method static process($log = null)
  * @method static latest()
  */
 class Laralog extends Facade

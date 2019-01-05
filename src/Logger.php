@@ -242,6 +242,12 @@ class Logger
             return $this->path.DIRECTORY_SEPARATOR.LL_LOG_PREFIX.normalizeDateName($name).LL_LOG_EXTENSION;
         }
 
+        $validName = $this->isValidName($name);
+
+        if ($validName) {
+            return $this->path.DIRECTORY_SEPARATOR.$validName.LL_LOG_EXTENSION;
+        }
+
         throw new LaralogException("Invalid log name!");
     }
 
@@ -352,5 +358,29 @@ class Logger
     protected function isCarbonInstance($name): bool
     {
         return $name instanceof Carbon;
+    }
+
+    /**
+     * @param $name
+     *
+     * @return bool|string
+     */
+    protected function isValidName($name)
+    {
+        $fixedExt = $this->normalizeLogExtension($name);
+        $base = basename($fixedExt);
+        $normalized = normalizeDateName($base);
+
+        return $normalized;
+    }
+
+    /**
+     * @param $fileName
+     *
+     * @return string
+     */
+    protected function normalizeLogExtension($fileName): string
+    {
+        return rtrim($fileName, '.log').LL_LOG_EXTENSION;
     }
 }
