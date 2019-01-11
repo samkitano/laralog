@@ -39,6 +39,9 @@ class Logger
     /** @var string */
     protected $currentLog;
 
+    protected $currentLogSize;
+
+
     use ProcessLogs;
 
     /**
@@ -96,6 +99,7 @@ class Logger
     {
         $this->currentLog = $this->getLogFullPath($logfile);
         $this->rawLog = $this->getRawLog();
+        $this->currentLogSize = filesize($this->currentLog);
 
         $this->makeLog();
 
@@ -286,6 +290,7 @@ class Logger
                     'name' => basename($this->currentLog),
                     'path' => $this->currentLog,
                     'length' => count($entries),
+                    'size' => $this->currentLogSize,
                     'entries' => $entries,
                 ]
         ];
