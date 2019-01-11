@@ -181,10 +181,12 @@ class LaralogTest extends TestCase
         $firstKey = array_keys($result)[0];
         $name = $result[$firstKey]['name'];
         $entries = $result[$firstKey]['entries'];
+        $size = $result[$firstKey]['size'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
         $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertEquals(11568, $size);
         $this->assertTrue(is_array($entries));
     }
 
@@ -195,10 +197,12 @@ class LaralogTest extends TestCase
         $firstKey = array_keys($result)[0];
         $name = $result[$firstKey]['name'];
         $entries = $result[$firstKey]['entries'];
+        $size = $result[$firstKey]['size'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
         $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertEquals(11568, $size);
         $this->assertTrue(is_array($entries));
     }
 
@@ -209,10 +213,12 @@ class LaralogTest extends TestCase
         $firstKey = array_keys($result)[0];
         $name = $result[$firstKey]['name'];
         $entries = $result[$firstKey]['entries'];
+        $size = $result[$firstKey]['size'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-12-02', $firstKey);
         $this->assertEquals( 'laravel-2017-12-02.log', $name);
+        $this->assertEquals(16392, $size);
         $this->assertTrue(is_array($entries));
     }
 
@@ -226,10 +232,12 @@ class LaralogTest extends TestCase
         $firstKey = array_keys($result)[0];
         $name = $result[$firstKey]['name'];
         $entries = $result[$firstKey]['entries'];
+        $size = $result[$firstKey]['size'];
 
         $this->assertTrue(is_array($result));
         $this->assertEquals('2017-06-10', $firstKey);
         $this->assertEquals( 'laravel-2017-06-10.log', $name);
+        $this->assertEquals(11568, $size);
         $this->assertTrue(is_array($entries));
     }
 
