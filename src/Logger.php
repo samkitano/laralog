@@ -39,6 +39,7 @@ class Logger
     /** @var string */
     protected $currentLog;
 
+    /** @var int */
     protected $currentLogSize;
 
 
