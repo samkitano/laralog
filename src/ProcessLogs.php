@@ -61,6 +61,8 @@ trait ProcessLogs
         $error = trim(str_replace('[object]', '', $error));
         $error = ltrim($error, '(');
         $error = rtrim($error, ')');
+        $stack = trim($stack);
+        $stack = rtrim($stack, '"}');
 
         return [
             'raw_header' => $header,
